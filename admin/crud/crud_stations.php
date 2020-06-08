@@ -2,26 +2,20 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "api_db";
+$dbname = "autolocker";
+$tablename = "stations";
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $sql = "INSERT INTO `stations` (`station_id`, `station`, `created_on`) VALUES
+( 'A001', 'Tena Primary.', '2014-05-30 17:34:33')
 
-    // sql to create table
-    $sql = "CREATE TABLE IF NOT EXISTS `categories` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(256) NOT NULL,
-  `description` text NOT NULL,
-  `created` datetime NOT NULL,
-  `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ";
-
+";
     // use exec() because no results are returned
     $conn->exec($sql);
-    echo "Table MyGuests created successfully";
+    echo "New record created successfully";
     }
 catch(PDOException $e)
     {
